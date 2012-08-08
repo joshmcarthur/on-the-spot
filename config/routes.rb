@@ -1,3 +1,5 @@
 OnTheSpot::Application.routes.draw do
-  root :to => 'queue#index'
+  resources :search, :only => [:index, :new]
+  resources :queue
+  root :to => 'search#index'
 end

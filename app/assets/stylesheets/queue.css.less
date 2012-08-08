@@ -1,0 +1,47 @@
+.currently_playing {
+	.playing_panel();
+
+	.nothing {
+		text-align: center;
+		margin: 2% auto;
+		color: #666;
+	}
+}
+
+.play_queue {
+	.playing_panel()
+}
+
+.playing_panel() {
+	background: white;
+	border-radius: 6px;
+	padding: 2%;
+	margin: 2% auto;
+}
+
+ul#upcoming {
+	margin-top: 2%;
+	font-size: 125%;
+	line-height: 150%;
+
+	li {
+		margin-bottom: 2%;
+		padding: 2% 0;
+		border-bottom: solid 1px #DDD;
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		span.number {
+			color: #000;
+		}
+		h1 {
+			color: #333;
+		}
+
+		h2 {
+			color: #666;
+		}
+	}
+}
