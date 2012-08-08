@@ -3,26 +3,57 @@ body {
 
 	.brand {
 		background-color: white;
-		border-radius: 50%;
-		width: 200px;
-		height: 200px;
+		.heading_bubble(200px);
 		margin: 1% auto 5%;
 
 		h1 {
-			font-size: 35px;
-			font-family: serif;
+			font-family: 'Londrina Shadow', serif;
+			font-size: 60px;
 			text-align: center;
-			padding-top: 75px;
+			padding-top: 45px;
+			line-height: 60px;
+			z-index: 10;
+			position: relative;
 		}
 	}
 
+	#nav_search {
+		font-family: 'Londrina Shadow', serif;
+		.heading_bubble(150px);
+		position: relative;
+		top: -150px;
+		left: -110px;
+
+		a, span {
+			display: block;
+			margin-left: 30px;
+			line-height: 150px;
+		}
+	}
+
+	#nav_queue {
+		font-family: 'Londrina Shadow', serif;
+		.heading_bubble(150px);
+		position: relative;
+		top: -300px;
+		left: 160px;
+
+		a, span {
+			display: block;
+			text-align: right;
+			margin-right: 30px;
+			line-height: 150px;
+		}
+	}
 
 }
 
-#search {
-	width: 96%;
-	line-height: 200%;
-	padding: 1%;
-	margin: 1%;
-	font-size: 125%;
+
+
+
+.heading_bubble (@radius: 150px, @color: #FFFFFF) {
+	background-color: @color;
+	border-radius: 50%;
+	width: @radius;
+	height: @radius;
 }
