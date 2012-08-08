@@ -2,7 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 #
-#= require jquery.masonry
+#= require jquery.spin
+
 
 $ ->
 	$('.play-btn').tooltip()
@@ -51,4 +52,5 @@ handleSearchResults = (results) ->
 	$('#tracks').empty()
 	_.each collection, (item) -> 
 		$('#tracks').append(item)
+
 
