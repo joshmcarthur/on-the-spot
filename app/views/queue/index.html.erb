@@ -1,5 +1,40 @@
 <div class="row-fluid">
-	<div class="span12 well">
-		<input type="search" id="search" placeholder="Find ANYTHING..." />
+	<div class="span12 currently_playing">
+		<h1>
+			<i class="icon-bullhorn"></i>
+			Currently Playing
+		</h1>
+
+		<% if @current %>
+		<h2 class="track_name">
+			<%= @current.name %>
+		</h2>
+
+		<h3 class="artist_name">
+			<%= @current.artists.first.name %>
+		</h3>
+		<% else %>
+		<h2 class="nothing">
+			Nothing playing...
+		</h2>
+		<% end %>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12 play_queue">
+		<h1>
+			<i class="icon-reorder"></i>
+			Upcoming Tracks
+		</h1>
+
+		<ul id="upcoming" class="unstyled">
+			<% @next.each_with_index do |track, index| %>
+				<li>
+					<h1><span class="number"><%= index + 1 %></span> - <%= track.name %></h1>
+					<h2><%= track.artists.first.name %> (<%= track.album.name %>)</h2>
+				</li>
+			<% end %>
+		</ul>
 	</div>
 </div>
