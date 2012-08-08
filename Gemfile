@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.7'
-gem 'sqlite3'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -18,6 +17,9 @@ end
 gem 'jquery-rails'
 gem 'resque'
 gem 'twitter-bootstrap-rails'
+gem 'underscore-rails'
+gem 'httparty', '0.7.8'
+gem 'meta-spotify'
 
 
 group :development, :test do
