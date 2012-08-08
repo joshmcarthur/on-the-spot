@@ -18,6 +18,7 @@ gem 'jquery-rails'
 gem 'resque'
 gem 'twitter-bootstrap-rails'
 gem 'underscore-rails'
+gem 'spinjs-rails'
 gem 'httparty', '0.7.8'
 gem 'meta-spotify'
 
