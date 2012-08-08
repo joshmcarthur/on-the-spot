@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 #
 
-window.OnTheSpot = {}
+
 OnTheSpot.Queue = {
 	add: (track_data) ->
 		$.post '/queue/',
