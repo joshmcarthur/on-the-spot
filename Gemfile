@@ -19,6 +19,7 @@ gem 'underscore-rails'
 gem 'spinjs-rails'
 gem 'httparty', '0.7.8'
 gem 'daemons-rails'
+gem 'meta-spotify'
 gem 'hallon'
 gem 'hallon-openal'
 
