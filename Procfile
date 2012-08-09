@@ -1,2 +1,2 @@
-web: bundle exec thin start
-daemon: bundle exec rake daemon:spotify_controller:start
+web: bundle exec rails s 
+daemon: bundle exec rake daemon:spotify_controller:startgstg
