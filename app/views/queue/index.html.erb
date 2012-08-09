@@ -1,3 +1,7 @@
+<% content_for :head do %>
+	<meta http-equiv="refresh" content="10">
+<% end %>
+
 <div class="row-fluid">
 	<div class="span12 currently_playing">
 		<h1>
@@ -6,13 +10,13 @@
 		</h1>
 
 		<% if @current %>
-		<h2 class="track_name">
+		<h1 class="track_name">
 			<%= @current.name %>
-		</h2>
+		</h1>
 
-		<h3 class="artist_name">
+		<h2 class="artist_name">
 			<%= @current.artists.first.name %>
-		</h3>
+		</h2>
 		<% else %>
 		<h2 class="nothing">
 			Nothing playing...
@@ -27,6 +31,8 @@
 			<i class="icon-reorder"></i>
 			Upcoming Tracks
 		</h1>
+
+		<%= content_tag :h2, 'Nothing Queued...', :class => "nothing" if @next.empty? %>
 
 		<ul id="upcoming" class="unstyled">
 			<% @next.each_with_index do |track, index| %>
