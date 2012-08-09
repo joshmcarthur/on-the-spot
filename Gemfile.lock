@@ -30,6 +30,12 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     builder (3.0.0)
+    capistrano (2.12.0)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -65,6 +71,7 @@ GEM
       spotify (~> 12.3.0)
     hallon-openal (1.0.0)
       hallon (~> 0.13)
+    highline (1.6.13)
     hike (1.2.1)
     httparty (0.7.8)
       crack (= 0.1.8)
@@ -90,6 +97,13 @@ GEM
       httparty (>= 0.4.5, < 0.8)
     mime-types (1.19)
     multi_json (1.3.6)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.5.2)
+    net-ssh-gateway (1.1.0)
+      net-ssh (>= 1.99.1)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -186,6 +200,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  capistrano
   coffee-rails (~> 3.2.1)
   daemons-rails
   debugger

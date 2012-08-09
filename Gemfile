@@ -26,4 +26,5 @@ gem 'hallon-openal'
 group :development, :test do
   gem 'debugger'
   gem 'rspec-rails'
+  gem 'capistrano'
 end
