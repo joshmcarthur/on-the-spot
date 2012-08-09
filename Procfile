@@ -1,2 +1,2 @@
 web: bundle exec rails s 
-daemon: bundle exec rake daemon:spotify_controller:startgstg
+daemon: bundle exec ./lib/daemons/spotify_controller_ctl run
