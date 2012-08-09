@@ -9,6 +9,7 @@
 
 .DS_Store
 .rvmrc
+config/keys
 config/database.yml
 
 # Ignore the default SQLite database.
