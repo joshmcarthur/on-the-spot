@@ -8,7 +8,7 @@ class SearchController < ApplicationController
 
   def new
     @results = Rails.cache.fetch "search-for-#{params[:q]}" do
-      MetaSpotify::Track.search(params[:q])
+      Hallon::Search.new(params[:q], :tracks => 25)
     end
 
     respond_to do |format|
