@@ -24,17 +24,15 @@ $ ->
 
 handleSearchResults = (results) ->
 	tracks = []
-	artists = []
-	albums = []
 
 	for track in results
-		track_key = {name: track.name, popularity: track.popularity, uri: track.uri}
-
-		tracks.push track_key unless _.include(tracks, track_key)
+		tracks.push track unless _.include(tracks, track)
 
 	tracks = _.map tracks, (track) ->
 		$("<li></li>")
-		.text(track.name)
+		.append($('<span></span>').addClass('track').text(track.name))
+		.append($('<span></span>').addClass('artist').text(" - #{track.artist}")) 
+		.append($('<span></span>').addClass('album').text(" (#{track.album})"))
 		.data('popularity', track.popularity)
 		.data('uri', track.uri)
 		.prepend($('<i></i>').addClass('icon-music'))
@@ -44,7 +42,7 @@ handleSearchResults = (results) ->
 			.append($('<i />').addClass('icon-plus')))
 
 
-	collection = _.sortBy tracks.concat(artists).concat(albums), (item) ->
+	collection = _.sortBy tracks, (item) ->
 		return 0 unless item.data('popularity')
 		return Math.round(1 - item.data('popularity'))
 
