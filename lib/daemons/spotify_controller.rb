@@ -18,9 +18,32 @@ while($running) do
 
   $player = Hallon::Player.new(Hallon::OpenAL)
 
-  while track = $redis.lpop("tracks")
-    $player.play!(track)
+  while uri = $redis.rpop("tracks")
+    # Only continue if the URI looks like a spotify one
+    if uri =~ /\Aspotify\:/
+      # Load the track
+      track = Hallon::Track.new(uri).load
+
+      # Set the currently-playing track
+      $redis.set "currently_playing", uri
+
+      # log the playing track
+      Rails.logger.info "Start Playing: #{track.name}"
+
+      begin
+        # Play the track
+        $player.play!(track)
+      ensure
+        $player.stop
+      end
+
+      # log the stopped track
+      Rails.logger.info "Stop Playing: #{track.name}"
+
+      # Clear the currently playing track
+      $redis.del "currently_playing"
+    end
   end
   
-  sleep 10
+  sleep 5
 end
