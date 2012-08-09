@@ -8,6 +8,8 @@ require File.expand_path(File.join(File.dirname(__FILE__), "..", "..", "config",
 $running = true
 Signal.trap("TERM") do 
   $running = false
+  $player.stop
+  $redis.del "currently_playing"
 end
 
 while($running) do
@@ -35,6 +37,7 @@ while($running) do
         $player.play!(track)
       ensure
         $player.stop
+        $redis.del "currently_playing"
       end
 
       # log the stopped track
