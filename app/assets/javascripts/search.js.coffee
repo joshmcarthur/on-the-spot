@@ -43,8 +43,9 @@ handleSearchResults = (results) ->
 
 
 	collection = _.sortBy tracks, (item) ->
-		return 0 unless item.data('popularity')
-		return Math.round(1 - item.data('popularity'))
+		return 1000 unless item.data('popularity')
+		console.log "Track: #{item.find('.track').text()}, popularity: #{(100 - item.data('popularity'))}"
+		return 100 - item.data('popularity')
 
 	return if collection.length == 0
 	$('#tracks').empty()
