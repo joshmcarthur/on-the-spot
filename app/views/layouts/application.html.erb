@@ -39,6 +39,12 @@
     <%= yield :head %>
   </head>
   <body>
+    <nav class="main">
+      <div id="now_playing" class="hide">
+        <%= content_tag :i, '', :rel => 'tooltip', :title => "Now Playing", :class => 'icon-play-circle' %>&nbsp;
+        <span>School of Fish - Score</span>
+      </div>
+    </nav>
     <header class="brand">
       <h1>On the Spot</h1>
       <h2 id="nav_search">
@@ -71,10 +77,13 @@
       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     </footer>
 
+
     <!-- Javascripts
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
 
+    <!--- PrivateSub subscriptions (Public) -->
+    <%= subscribe_to "/tracks/new" %>
   </body>
 </html>
