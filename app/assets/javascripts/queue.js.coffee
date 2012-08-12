@@ -9,6 +9,5 @@ OnTheSpot.Queue = {
 		$.post '/queue/',
 			track_data,
 			->
-				alert('Added!')
 }
 
