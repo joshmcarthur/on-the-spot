@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require underscore
+//= require private_pub
 //= require twitter/bootstrap
 //= require namespace
 //= require_tree .
