@@ -6,37 +6,36 @@ ENV["RAILS_ENV"] ||= "production"
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "..", "config", "environment"))
 
 $running = true
+$player = Hallon::Player.new(Hallon::OpenAL)
+$player.volume_normalization = true
+
 Signal.trap("TERM") do 
   $running = false
   $player.stop
   $redis.del "currently_playing"
 end
 
-while($running) do
-  
-  # Replace this with your code
-  Rails.logger.auto_flushing = true
-  Rails.logger.info "This daemon is still running at #{Time.now}.\n"
-
-  $player = Hallon::Player.new(Hallon::OpenAL)
+while($running and $player) do
 
   while uri = $redis.rpop("tracks")
     # Only continue if the URI looks like a spotify one
     if uri =~ /\Aspotify\:/
-      # Load the track
-      track = Hallon::Track.new(uri).load
+
 
       # Set the currently-playing track
       $redis.set "currently_playing", uri
+
+      # Load the track
+      track = Hallon::Track.new(uri).load
 
       # log the playing track
       Rails.logger.info "Start Playing: #{track.name}"
 
       begin
+        $player.load(track)
         # Play the track
         $player.play!(track)
       ensure
-        $player.stop
         $redis.del "currently_playing"
       end
 
