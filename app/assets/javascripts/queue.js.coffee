@@ -2,6 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 #
+#= require private_pub
 
 
 OnTheSpot.Queue = {
@@ -11,3 +12,11 @@ OnTheSpot.Queue = {
 			->
 }
 
+$ ->
+	$('#now_playing i[rel=tooltip]').tooltip(placement: 'bottom')
+	PrivatePub.subscribe "/tracks/new", (data, channel) ->
+		if data.track
+			$('#now_playing > span').text(data.track)
+			$('#now_playing').removeClass('hide')
+		else if data.stopped
+			$('#now_playing').addClass('hide')
