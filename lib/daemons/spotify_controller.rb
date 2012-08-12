@@ -32,6 +32,9 @@ while($running and $player) do
       Rails.logger.info "Start Playing: #{track.name}"
 
       begin
+        # Broadcast the playing track
+        PrivatePub.publish_to "/tracks/new", :track => track.name 
+
         $player.load(track)
         # Play the track
         $player.play!(track)
@@ -41,6 +44,9 @@ while($running and $player) do
 
       # log the stopped track
       Rails.logger.info "Stop Playing: #{track.name}"
+
+      # Broadcast that we are no longer playing the track
+      PrivatePub.publish_to "/tracks/new", :stopped => true
 
       # Clear the currently playing track
       $redis.del "currently_playing"
