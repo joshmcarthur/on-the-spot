@@ -13,7 +13,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'resque'
+gem 'redis'
 gem 'twitter-bootstrap-rails'
 gem 'underscore-rails'
 gem 'spinjs-rails'
@@ -22,6 +22,7 @@ gem 'daemons-rails'
 gem 'meta-spotify'
 gem 'hallon'
 gem 'hallon-openal'
+gem 'private_pub'
 
 group :development, :test do
   gem 'debugger'
