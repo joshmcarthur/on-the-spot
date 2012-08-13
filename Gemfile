@@ -23,7 +23,6 @@ gem 'meta-spotify'
 gem 'hallon'
 gem 'hallon-openal'
 gem 'private_pub'
-gem 'rack-pjax'
 
 group :development, :test do
   gem 'debugger'
