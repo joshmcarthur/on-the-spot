@@ -20,7 +20,7 @@ class QueueController < ApplicationController
   end
 
   def create
-    position = $redis.lpush "tracks", params[:uri]
+    position = $redis.lpush "play_queue", params[:uri]
     flash.now[:notice] = I18n.t('queue.create.success', :position => position.ordinalize)
     render :status => :created
   end
