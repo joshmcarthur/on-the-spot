@@ -13,6 +13,7 @@ This application is used at [3months](http://3months.com), to queue and play mus
 ## Setup
 
 1. Clone the application: `git clone git://github.com:joshmcarthur/on-the-spot.git`
+2. Install Redis: OS X: `brew install redis`, Debian/Ubunutu: `sudo apt-get install redis-server`
 2. Pull in dependencies: `bundle install`
 3. Add configuration variables to a file named `.env`:
 
@@ -20,6 +21,7 @@ This application is used at [3months](http://3months.com), to queue and play mus
 	SPOTIFY_USERNAME="(The Facebook email you want to log in as)"
 	SPOTIFY_PASSWORD="(The Facebook password for the account)"
 	```
+4. Generate an application key at https://developer.spotify.com/technologies/libspotify/ (Requires Spotify Premium account), and save the key in `config/keys/spotify_appkey.key`
 	
 4. Start the application by executing: `bundle exec foreman start`. This will run the following processes:
 	1. `rails server` (with Thin, runs application)
