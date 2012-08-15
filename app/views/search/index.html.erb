@@ -1,16 +1,68 @@
 	<div class="row-fluid">
-		<div class="span12 well">
+		<div class="span12 search_box well">
 			<input type="search" id="search" placeholder="Find anything..." />
+			<a class="help-link icon-question-sign" data-toggle="modal" href="#operators_help">
+				Searching Help
+			</a>
 		</div>
 	</div>
 
 	<div class="row-fluid">
-		<div class="span6">
-			<ul class="row unstyled" id="albums"></ul>
-		</div>
-
-		<div class="span6">
+		<div class="span12">
 			<ul class="row unstyled" id="tracks"></ul>
 		</div>
 	</div>
 
+
+	<div id="operators_help" class="modal hide">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3>Hey there, smooth operator!</h3>
+		</div>
+		<div class="modal-body">
+			<p>
+				Did you know you can use 'operators' to narrow down these search results?
+				<br />
+				They're really easy - you can even combine all of these with <strong>AND</strong>
+				and <strong>OR</strong>!
+			</p>
+
+			<dl>
+				<dt>Artist</dt>
+				<dd>
+					artist:(Artist name)
+					<span class="example">
+						e.g.
+						<a class="search_example" href="#">artist:S Club 7</a>
+					</span>
+				</dd>
+
+				<dt>Album</dt>
+				<dd>
+					album:(Album name)
+					<span class="example">
+						e.g.
+						<a class="search_example" href="#">album:American Idiot</a>
+					</span>
+				</dd>
+
+				<dt>Genre</dt>
+				<dd>
+					genre:(Genre name)
+					<span class="example">
+						e.g.
+						<a class="search_example" href="#">genre:Rock</a>
+					</span>
+				</dd>
+
+				<dt>Year</dt>
+				<dd>
+					year:(Year)
+					<span class="example">
+						e.g.
+						<a class="search_example" href="#">year:1992</a>
+					</span>
+				</dd>
+			</dl>
+		</div>
+	</div>
