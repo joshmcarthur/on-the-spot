@@ -15,6 +15,7 @@ $ ->
 
 	$('input#search').keyup (event) ->
 		query = $(this).val()
+		$('#tracks').empty() if query.length < 1
 		return if query.length < 5
 
 		$.getJSON(
