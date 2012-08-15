@@ -7,10 +7,11 @@
 
 $ ->
 	$('.play-btn').tooltip()
-
 	$('.play-btn').live 'click', ->
 		row = $(this).closest('li')
 		OnTheSpot.Queue.add({name: row.text(), uri: row.data('uri')})
+
+	$('a.search_example').click autofillSearch
 
 	$('input#search').keyup (event) ->
 		query = $(this).val()
@@ -22,34 +23,16 @@ $ ->
 			handleSearchResults
 		)
 
+autofillSearch = (event) ->
+	event.preventDefault()
+	event.stopPropagation()
+
+	$('input#search').val $(event.target).text()
+	$('input#search').trigger('keyup')
+	$('.modal').modal('hide')
 
 handleSearchResults = (results) ->
 	processTracks(results.tracks)
-	processAlbums(results.albums)
-
-processAlbums = (raw_albums) ->
-	albums = []
-
-	for album in raw_albums
-		albums.push album unless _.include(albums, album)
-
-	albums = _.map albums, (album) ->
-		$("<li></li>")
-		.append($('<span></span>').addClass('album').text(album.name))
-		.append($('<span></span>').addClass('artist').text(" - #{album.artist}"))
-		.data('uri', album.uri)
-		.prepend($('<i></i>').addClass('icon-list').attr('title', 'Album'))
-		.append($("<button></button>")
-			.addClass('btn btn-success play-btn')
-			.attr('title', "Play: #{album.name}")
-			.append($('<i />').addClass('icon-plus')))
-
-	return if albums.length == 0
-	$('#albums').empty()
-	_.each albums, (item) ->
-		$('#albums').append(item)
-
-	$('.icon-list').tooltip()
 
 
 processTracks = (raw_tracks) ->
