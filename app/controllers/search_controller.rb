@@ -6,9 +6,9 @@ class SearchController < ApplicationController
 
   def new
     @results = Rails.cache.fetch "search-for-#{params[:q]}" do
-      search = Hallon::Search.new(params[:q], :tracks => 25, :albums => 5).load
+      search = Hallon::Search.new(params[:q], :tracks => 25).load
       {
-        :tracks => search.tracks.to_a.map { |track|
+        :tracks => search.tracks.to_a.map do |track|
           {
             :name => track.name,
             :artist => track.artists.first.name,
@@ -16,14 +16,7 @@ class SearchController < ApplicationController
             :popularity => track.popularity,
             :uri => track.to_link.to_str
           }
-        },
-        :albums => search.albums.to_a.map { |album|
-          {
-            :name => album.name,
-            :artist => album.artist.name,
-            :uri => album.to_link.to_str
-          }
-        }
+        end
       }
     end
 
