@@ -7,7 +7,7 @@ class QueueController < ApplicationController
     @next    = []
 
     (-3..-1).to_a.each do |index|
-      track_uri = $redis.lindex("tracks", index)
+      track_uri = $redis.lindex("play_queue", index)
       next unless track_uri
       @next << Rails.cache.fetch(track_uri) do
         MetaSpotify::Track.lookup(track_uri)
