@@ -184,8 +184,6 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    spinjs-rails (0.0.3)
-      rails (>= 3.1)
     spotify (12.3.0)
       ffi (~> 1.0, >= 1.0.11)
       libspotify (~> 12.1.51)
@@ -238,7 +236,6 @@ DEPENDENCIES
   redis
   rspec-rails
   sass-rails (~> 3.2.3)
-  spinjs-rails
   thin
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
