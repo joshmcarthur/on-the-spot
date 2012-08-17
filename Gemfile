@@ -29,5 +29,6 @@ group :development, :test do
   gem 'fakeredis'
   gem 'guard'
   gem 'guard-rspec'
+  gem 'simplecov'
   gem 'capistrano'
 end
