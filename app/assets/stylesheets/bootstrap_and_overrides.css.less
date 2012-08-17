@@ -33,11 +33,21 @@ body {
 
 @successBackground: white;
 @successText: @green;
+@errorBackground: white;
+@errorText: @red;
 
-.alert-success {
+.alert-success, .alert-error {
 	border: 10px solid @green;
 	padding: 2%;
 	font-size: 125%;
 	line-height: 150%;
+}
+
+.alert-success { 
+	border-color: @green;
+}
+
+.alert-error {
+	border-color: @red;
 }
 
