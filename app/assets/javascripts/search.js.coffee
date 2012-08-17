@@ -6,7 +6,6 @@
 
 
 $ ->
-	$('.play-btn').tooltip()
 	$('.play-btn').live 'click', ->
 		row = $(this).closest('li')
 		OnTheSpot.Queue.add({name: row.text(), uri: row.data('uri')})
@@ -17,6 +16,8 @@ $ ->
 		query = $(this).val()
 		$('#tracks').empty() if query.length < 1
 		return if query.length < 5
+
+		showActivity()
 
 		$.getJSON(
 			'/search/new',
@@ -31,6 +32,12 @@ autofillSearch = (event) ->
 	$('input#search').val $(event.target).text()
 	$('input#search').trigger('keyup')
 	$('.modal').modal('hide')
+
+showActivity = ->
+	$('.spinner').removeClass('hidden')
+
+hideActivity = ->
+	$('.spinner').addClass('hidden')
 
 handleSearchResults = (results) ->
 	processTracks(results.tracks)
@@ -64,5 +71,6 @@ processTracks = (raw_tracks) ->
 	_.each collection, (item) -> 
 		$('#tracks').append(item)
 
+	hideActivity()
 	$('.icon-music').tooltip()
 
