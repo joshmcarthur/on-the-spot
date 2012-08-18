@@ -43,7 +43,7 @@ describe SearchController do
       end
 
       it "should have a string duration" do
-        @datum[:duration].should match /\A[0-9]{1,2}\m:[0-9]{2}s\Z/
+        @datum[:duration].should match /\A[0-9]{1,2}\m\s{1}[0-9]{2}s\Z/
       end
 
       it "should have a Spotify URI" do 
