@@ -52,6 +52,7 @@ processTracks = (raw_tracks) ->
 		.append($('<span></span>').addClass('track').text(track.name))
 		.append($('<span></span>').addClass('artist').text(" - #{track.artist}")) 
 		.append($('<span></span>').addClass('album').text(" (#{track.album})"))
+		.append($('<span></span>').addClass('duration').text(" - #{track.duration}"))
 		.data('popularity', track.popularity)
 		.data('uri', track.uri)
 		.prepend($('<i></i>').addClass('icon-music').attr('title', 'Track'))

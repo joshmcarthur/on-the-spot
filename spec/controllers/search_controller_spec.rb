@@ -42,6 +42,10 @@ describe SearchController do
         @datum[:popularity].should be_between(1, 100)
       end
 
+      it "should have a string duration" do
+        @datum[:duration].should match /\A[0-9]{1,2}\m:[0-9]{2}s\Z/
+      end
+
       it "should have a Spotify URI" do 
         URI.parse(@datum[:uri]).scheme.should eq "spotify"
       end
