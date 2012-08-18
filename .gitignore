@@ -12,6 +12,7 @@
 config/keys
 config/deploy.rb
 config/private_pub.yml
+coverage/
 .env
 config/database.yml
 

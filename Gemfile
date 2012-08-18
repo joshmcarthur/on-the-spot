@@ -14,9 +14,9 @@ end
 
 gem 'jquery-rails'
 gem 'redis'
+gem 'hiredis'
 gem 'twitter-bootstrap-rails'
 gem 'underscore-rails'
-gem 'spinjs-rails'
 gem 'httparty', '0.7.8'
 gem 'daemons-rails'
 gem 'meta-spotify'
@@ -27,5 +27,9 @@ gem 'private_pub'
 group :development, :test do
   gem 'debugger'
   gem 'rspec-rails'
+  gem 'fakeredis'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'simplecov'
   gem 'capistrano'
 end
