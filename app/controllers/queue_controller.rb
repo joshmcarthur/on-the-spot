@@ -2,6 +2,12 @@
 require 'active_support/core_ext/integer/inflections'
 
 class QueueController < ApplicationController
+
+  def current
+    @current = QueuedTrack.find($redis.get("currently_playing"))
+    render :text => @current.try(:name)
+  end
+
   def index
     @current = QueuedTrack.find($redis.get("currently_playing"))
     @next    = QueuedTrack.next(3)

@@ -9,6 +9,21 @@ describe QueueController do
   before :each do
     $redis.del "currently_playing"
     $redis.del "play_queue"
+
+    $player.stub!(:play!)
+  end
+
+  describe "GET current" do
+    it "should return the currently playing track when one is playing" do
+      $redis.set "currently_playing", track_uri
+      get :current
+      response.body.should eq QueuedTrack.find(track_uri).name
+    end
+
+    it "should return an empty string when no track is playing"  do
+      get :current
+      response.body.should be_blank
+    end
   end
 
   describe "GET index" do
