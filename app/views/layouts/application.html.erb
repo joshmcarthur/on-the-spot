@@ -40,10 +40,8 @@
   </head>
   <body>
     <nav class="main">
-      <div id="now_playing" class="hide">
-        <%= content_tag :i, '', :rel => 'tooltip', :title => "Now Playing", :class => 'icon-play-circle' %>&nbsp;
-        <span>School of Fish - Score</span>
-      </div>
+      <%= render 'layouts/common/controls' %>
+      <%= render 'layouts/common/now_playing' %>
     </nav>
     <header class="brand">
       <h1>On the Spot</h1>
