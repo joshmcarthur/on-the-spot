@@ -25,4 +25,15 @@ class QueueController < ApplicationController
 
     render
   end
+
+  def clear
+    # Try and stop the current track
+    $player.stop
+
+    # Clear the queue
+    $redis.del "play_queue"
+
+    flash[:success] = I18n.t('queue.clear.success')
+    redirect_to root_path
+  end
 end

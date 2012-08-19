@@ -3,6 +3,8 @@
 
 en:
   queue:
+    clear:
+      success: 'Queue has been cleared!'
     create:
       success: 'Added your track - it is %{position} in the queue'
       failure: 'Sorry, this track is already on the queue.'
