@@ -1,12 +1,9 @@
 <div id="controls">
-	<%= link_to '#' do %>
-		<%= content_tag :i, '', :class => 'icon-play' %>
-	<% end %>
-	<%= link_to '#' do %>
-		<%= content_tag :i, '', :class => 'icon-pause' %>
+	<%= link_to play_or_pause_player_path do %>
+		<%= content_tag :i, '', :class => 'icon-stop', :id => 'play_or_pause' %>
 	<% end %>
 
-	<%= link_to '#' do %>
+	<%= link_to clear_queue_index_path, :method => :delete, :title => 'Clear Queue' do %>
 		<%= content_tag :i, '', :class => 'icon-signout' %>
 	<% end %>
 
