@@ -13,5 +13,5 @@ rvm:
   - ree
 before_install: 
   - sudo apt-get update -qq
-  - sudo apt-get install -qq libopenal libopenal-dev
+  - sudo apt-get install -qq libalut-dev
 script: RAILS_ENV=test bundle exec rake spec
