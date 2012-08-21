@@ -37,7 +37,7 @@ RSpec.configure do |config|
     hallon_track = double("Hallon::Track").as_null_object
     Hallon::Track = hallon_track
 
-    session_instance = OpenStruct.new(g:pointer => "Pointer")
+    session_instance = OpenStruct.new(:pointer => "Pointer")
     session_instance.stub(:on).and_return(nil)
 
     Hallon::AudioQueue.any_instance.stub(:new_cond).and_return(OpenStruct.new)
