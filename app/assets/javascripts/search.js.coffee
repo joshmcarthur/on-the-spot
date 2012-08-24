@@ -11,18 +11,30 @@ $ ->
 
 	$('a.search_example').click autofillSearch
 
-	$('input#search').keyup (event) ->
+	$('input#search').on 'search_changed', ->
 		query = $(this).val()
 		$('#tracks').empty() if query.length < 1
 		return if query.length < 5
+
+		if OnTheSpot.searching == true
+			return
+		else
+			OnTheSpot.searching = true
 
 		showActivity()
 
 		$.getJSON(
 			'/search/new',
 			{q: query},
-			handleSearchResults
+			(results) ->
+				handleSearchResults(results)
+				OnTheSpot.searching = false
 		)
+
+
+
+	$('input#search').keyup (event) ->
+		setTimeout("$('input#search').trigger('search_changed')", 1000)
 
 autofillSearch = (event) ->
 	event.preventDefault()
@@ -66,11 +78,14 @@ processTracks = (raw_tracks) ->
 		console.log "Track: #{item.find('.track').text()}, popularity: #{(100 - item.data('popularity'))}"
 		return 100 - item.data('popularity')
 
+	hideActivity()
+
 	return if collection.length == 0
 	$('#tracks').empty()
 	_.each collection, (item) -> 
 		$('#tracks').append(item)
 
-	hideActivity()
+
 	$('.icon-music').tooltip()
+
 
