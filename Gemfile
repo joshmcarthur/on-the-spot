@@ -13,8 +13,9 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'redis'
+gem 'redis', '~> 2.2'
 gem 'hiredis'
+gem 'redis-store', '~> 1.0.0' # <- For caching
 gem 'twitter-bootstrap-rails'
 gem 'underscore-rails'
 gem 'httparty', '0.7.8'
