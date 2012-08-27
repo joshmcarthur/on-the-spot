@@ -8,53 +8,24 @@ describe PlayerController do
     PrivatePub.stub!(:publish_to)
   end
 
-  describe "POST play_or_pause" do
-    context "player is playing" do
-      before :each do
-        $player.stub!(:status).and_return(:playing, :paused)
-      end
-
-      it "should pause the track" do
-        $player.should_receive(:pause)
-        post :play_or_pause
-      end
-
-      it "should return the new player status" do
-        post :play_or_pause
-        response.body.should eq "paused"
-      end
+  describe "POST mute" do
+    it "should respond with mute" do
+      post :mute
+      response.should eq "mute"
     end
+  end
 
-    context "player is paused" do
-      before :each do
-        $player.stub!(:status).and_return(:paused, :playing)
-      end
-
-      it "should play the track" do
-        $player.should_receive(:play)
-        post :play_or_pause
-      end
-
-      it "should return the new player status" do
-        post :play_or_pause
-        response.body.should eq "playing"
-      end
+  describe "POST unmute" do
+    it "should response with unmute" do
+      post :unmute
+      response.should eq "unmute"
     end
+  end
 
-    context "player is stopped" do
-      before :each do
-        $player.stub!(:status).and_return(:stopped, :playing)
-      end
-
-      it "should play the track" do
-        $player.should_receive(:play)
-        post :play_or_pause
-      end
-
-      it "should retern the new player status" do
-        post :play_or_pause
-        response.body.should eq "playing"
-      end
+  describe "GET status" do
+    it "should respond with unmute" do
+      get :status
+      response.should eq "unmute"
     end
   end
 end

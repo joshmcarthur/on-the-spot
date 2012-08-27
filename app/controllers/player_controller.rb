@@ -1,20 +1,27 @@
 class PlayerController < ApplicationController
 
-  def play_or_pause
+  def mute
+    Sound.mute!
+    respond_with_state_change
+  end
 
-    case $player.status
-      when :playing
-        $player.pause
-      when :paused
-        $player.play
-    end
-
-    render :text => $player.status
-    PrivatePub.publish_to "/player", $player.status
+  def unmute!
+    Sound.unmute!
+    respond_with_state_change
   end
 
   def status
-    render :text => $player.status
+    render :nothing => true
+    #respond_with_state_change(false) and return
+  end
+
+  private
+
+  def respond_with_state_change(broadcast = true)
+    $redis.get("sound_state").tap do |state|
+      render :text => state
+      PrivatePub.publish_to "/player/state", state if broadcast
+    end
   end
 
 end
