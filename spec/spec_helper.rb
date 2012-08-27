@@ -27,26 +27,6 @@ RSpec.configure do |config|
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
 
-  config.before do
-    # FIXME - Track currently makes a new FFI Memory Pointer
-    # in it's constructor (which I can't stub out), and so
-    # I need to replace it with a double.
-    # This results in warnings about uninitialized constants, 
-    # but does allow the tests to run without a full-blown
-    # Spotify environment setup
-    hallon_track = double("Hallon::Track").as_null_object
-    Hallon::Track = hallon_track
-
-    session_instance = OpenStruct.new(:pointer => "Pointer")
-    session_instance.stub(:on).and_return(nil)
-
-    Hallon::AudioQueue.any_instance.stub(:new_cond).and_return(OpenStruct.new)
-
-    Hallon::Session.stub(:instance?).and_return(true)
-    Hallon::Session.stub(:instance).and_return(session_instance)
-    OnTheSpot::Application.setup_spotify!
-  end
-
   config.before(:each) do
     $player.stub(:play!)
     $player.stub(:load)
