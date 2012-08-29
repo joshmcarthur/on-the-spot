@@ -7,7 +7,7 @@ class QueuedTrack
   def self.find(uri)
     return unless uri.is_a?(String)
     Rails.cache.fetch uri do
-      MetaSpotify::Track.lookup(uri)
+      Hallon::Track.new(uri).load
     end
   end
 
@@ -68,4 +68,5 @@ class QueuedTrack
     # Clear the currently playing track
     $redis.del "currently_playing"
   end
+
 end
