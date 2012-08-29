@@ -28,6 +28,9 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
 
   config.before(:each) do
+    # Hallon queues stuff that can cause our tests to break
+    #Rails.cache.clear
+
     $player.stub(:play!)
     $player.stub(:load)
     Hallon::Track.any_instance.stub(:load).and_return(OpenStruct.new({:name => "Hurt Feelings"}))
