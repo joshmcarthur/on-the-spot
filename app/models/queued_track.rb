@@ -7,15 +7,17 @@ class QueuedTrack
   def self.find(uri)
     return unless uri.is_a?(String)
     Rails.cache.fetch uri do
-      MetaSpotify::Track.lookup(uri)
+      Hallon::Track.new(uri).load
     end
   end
 
   def self.present?(uri)
     # FIXME Loop through queue
-    $redis.lrange(@@queue_name, 0, -1).each do |value|
+    must_have_queue!
+    queue = $redis.lrange(@@queue_name, 0, -1)
+    queue.each do |value|
       return true if value == uri
-    end
+    end if queue
 
     return false
   end
@@ -66,5 +68,13 @@ class QueuedTrack
 
     # Clear the currently playing track
     $redis.del "currently_playing"
+  end
+
+  private
+
+  def self.must_have_queue!
+    unless $redis.get @@queue_name
+      $redis.lpush @@queue_name, nil
+    end
   end
 end
