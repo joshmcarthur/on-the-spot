@@ -6,13 +6,12 @@ class QueuedTrack
 
   def self.find(uri)
     return unless uri.is_a?(String)
-    Rails.cache.fetch uri do
-      MetaSpotify::Track.lookup(uri)
-    end
+    Hallon::Track.new(uri).load
   end
 
   def self.present?(uri)
     # FIXME Loop through queue
+    return false unless $redis.get @@queue_name
     $redis.lrange(@@queue_name, 0, -1).each do |value|
       return true if value == uri
     end
