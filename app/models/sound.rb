@@ -17,7 +17,7 @@ module Sound
     elsif Platform.linux?
       `amixer set Master #{volume}`
     else
-      raise "Volume control is not supported in #{RUBY_PLATFORM}"
+      raise "Volume control is not supported on #{RUBY_PLATFORM}"
     end 
   end
 end 

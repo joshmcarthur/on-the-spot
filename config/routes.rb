@@ -6,7 +6,8 @@ OnTheSpot::Application.routes.draw do
   end
 
   resource :player, :only => [], :controller => 'player' do
-    post :play_or_pause
+    post :mute
+    post :unmute
     get :status
   end
   

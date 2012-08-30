@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe QueueController do
   let(:track_uri) { "spotify:track:2ViEnnYXmb3Bm0s7XdqWdY" }
+  
   let(:track_one) { "spotify:track:1CDqOWVW4XggJv4aSjxZLg" }
   let(:track_two) { "spotify:track:0RlygkwmzYlFSZ5ydtDgKU" }
   let(:track_three) { "spotify:track:4NFtDCckVMiC2eKwYGoChl" }
