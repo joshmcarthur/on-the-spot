@@ -12,7 +12,7 @@ describe QueuedTrack do
 
   describe "#find" do
     it "should find a valid track" do
-      subject.find(track).should be_a(MetaSpotify::Track)
+      subject.find(track).should be_a(Hallon::Track)
     end
 
     it "should gracefully fail for an invalid track" do

@@ -6,9 +6,7 @@ class QueuedTrack
 
   def self.find(uri)
     return unless uri.is_a?(String)
-    Rails.cache.fetch uri do
-      Hallon::Track.new(uri).load
-    end
+    Hallon::Track.new(uri).load
   end
 
   def self.present?(uri)

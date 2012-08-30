@@ -63,6 +63,12 @@ module OnTheSpot
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    def self.setup_spotify!
+        $hallon_session = Hallon::Session.initialize IO.read(Rails.root.join('config', 'keys', 'spotify_appkey.key'))
+        $hallon_session.login!(ENV['SPOTIFY_USERNAME'] || "test", ENV['SPOTIFY_PASSWORD'] || "password")
 
+        $player = Hallon::Player.new(Hallon::OpenAL)
+        $player.volume_normalization = true
+    end
   end
 end

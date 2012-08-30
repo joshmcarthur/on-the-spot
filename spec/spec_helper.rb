@@ -9,6 +9,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 
+Rails.cache.clear
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
@@ -28,12 +30,8 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
 
   config.before(:each) do
-    # Hallon queues stuff that can cause our tests to break
-    #Rails.cache.clear
-
     $player.stub(:play!)
     $player.stub(:load)
-    Hallon::Track.any_instance.stub(:load).and_return(OpenStruct.new({:name => "Hurt Feelings"}))
   end
 
 
