@@ -9,8 +9,6 @@ describe QueueController do
   before :each do
     $redis.del "currently_playing"
     $redis.del "play_queue"
-
-    $player.stub!(:play!)
   end
 
   describe "GET current" do
@@ -66,7 +64,7 @@ describe QueueController do
       end
 
       it "should add the URI to the queue" do
-        $redis.lindex("play_queue", track_uri).should_not be_nil
+        QueuedTrack.present?(track_uri).should be_true
       end
 
       it "should set a flash message" do
