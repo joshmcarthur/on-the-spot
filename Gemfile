@@ -28,9 +28,13 @@ gem 'private_pub'
 group :development, :test do
   gem 'debugger'
   gem 'rspec-rails'
-  gem 'fakeredis'
   gem 'guard'
   gem 'guard-rspec'
   gem 'simplecov'
   gem 'capistrano'
 end
+
+group :test do
+  gem 'fakeredis'
+end
+
