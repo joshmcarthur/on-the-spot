@@ -1,3 +1,4 @@
+
 body { 
 	background: transparent image-url('background.gif');
 
@@ -18,9 +19,24 @@ body {
 
 		#controls {
 			left: 0px;
-			width: 60px;
+			width: 180px;
 			border-bottom-left-radius: 0px;
 			border-bottom-right-radius: 6px;
+			line-height: 20px;
+
+
+			a {
+				padding-right: 5px;
+				color: #222;
+
+				transition: color 1s linear;
+
+				&:hover {
+					text-decoration: none;
+				}
+
+
+			}
 		}
 	}
 
