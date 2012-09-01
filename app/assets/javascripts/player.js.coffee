@@ -3,26 +3,22 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 OnTheSpot.Player =  {
-	getStatus: ->
-		$.get '/player/status', OnTheSpot.Player.setStatus, 'html'
+	getState: ->
+		$.get '/player/status', OnTheSpot.Player.setState, 'html'
 
-	setStatus: (new_status) ->
-		switch new_status
-			when "playing"
-				$('i#play_or_pause').attr(title: 'Continue Playback')
-				$('i#play_or_pause').removeClass().addClass('icon-pause')
-			when "paused" 
-				$('i#play_or_pause').attr(title: 'Pause Playback')
-				$('i#play_or_pause').removeClass().addClass('icon-play')
-			when "stopped"
-				$('i#play_or_pause').attr(title: 'No track is queued, or player is not running')
-				$('i#play_or_pause').removeClass().addClass('icon-stop look-disabled')
+	setState: (new_state) ->
+		switch new_state
+			when "muted"
+				$('#mute').hide()
+				$('#unmute').show()
+			when "unmuted"
+				$('#mute').show()
+				$('#unmute').hide()
 
-
-		new_status
+		new_state
 }
 
 $ ->
-	OnTheSpot.Player.getStatus()
-	PrivatePub.subscribe "/player", (data, channel) ->
-		OnTheSpot.Player.setStatus(data)
+	OnTheSpot.Player.getState()
+	PrivatePub.subscribe "/player/state", (data, channel) ->
+		OnTheSpot.Player.setState(data.state) if data.state
