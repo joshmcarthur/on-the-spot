@@ -11,7 +11,6 @@ class PlayerController < ApplicationController
   end
 
   def status
-    render :nothing => true
     respond_with_state_change(false)
   end
 
@@ -19,7 +18,7 @@ class PlayerController < ApplicationController
 
   def respond_with_state_change(broadcast = true)
     state = $redis.get("sound_state")
-    PrivatePub.publish_to "/player/state", state if broadcast
+    PrivatePub.publish_to("/player/state", :state => state) if broadcast
     render :text => state and return
   end
 
