@@ -8,6 +8,7 @@ $ ->
 	$('.play-btn').live 'click', ->
 		row = $(this).closest('li')
 		OnTheSpot.Queue.add({name: row.text(), uri: row.data('uri')})
+	$('#controls a').tooltip(placement: 'right')
 
 	$('a.search_example').click autofillSearch
 
