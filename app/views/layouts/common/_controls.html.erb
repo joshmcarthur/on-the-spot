@@ -1,10 +1,17 @@
 <div id="controls">
-	<%= link_to play_or_pause_player_path, :method => :post, :remote => true do %>
-		<%= content_tag :i, '', :class => 'icon-stop', :id => 'play_or_pause' %>
+	<%= link_to mute_player_path, :method => :post, :remote => true, :id => 'mute', :title => "Mute Sound" do %>
+		<%= content_tag :i, '', :class => 'icon-volume-off' %>
+		Mute
+	<% end %>
+
+	<%= link_to unmute_player_path, :method => :post, :remote => true, :id => 'unmute', :title => "Un-Mute Sound" do %>
+		<%= content_tag :i, '', :class => 'icon-volume-up' %>
+		Unmute
 	<% end %>
 
 	<%= link_to clear_queue_index_path, :method => :delete, :title => 'Clear Queue' do %>
 		<%= content_tag :i, '', :class => 'icon-signout' %>
+		Clear Queue
 	<% end %>
 
 </div>
