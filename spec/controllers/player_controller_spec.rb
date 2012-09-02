@@ -19,4 +19,37 @@ describe PlayerController do
   end
 
 
+  describe "GET status" do
+    context "Player is muted" do
+      before :each do
+        Sound.mute!
+      end
+
+      it "should respond with correct status" do
+        get :status
+        response.body.should eq "muted"
+      end
+
+      it "should not publish a message" do
+        PrivatePub.should_not_receive(:publish_to)
+        get :status
+      end
+    end
+
+    context "Player is not muted" do
+      before :each do
+        Sound.unmute!
+      end
+
+      it "should respond with correct status" do
+        get :status
+        response.body.should eq "unmuted"
+      end
+
+      it "should not publish a message" do
+        PrivatePub.should_not_receive(:publish_to)
+        get :status
+      end
+    end
+  end
 end
