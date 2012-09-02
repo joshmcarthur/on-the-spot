@@ -97,4 +97,27 @@ describe QueueController do
       end
     end
   end
+
+  describe "DELETE clear" do
+    before :each do
+      QueuedTrack.create(track_uri)
+      delete :clear
+    end
+
+    it "should stop the player" do
+      $player.status.should eq :stopped
+    end
+
+    it "should clear the play queue" do
+      $redis.llen("play_queue").should eq 0
+    end
+
+    it "should set a flash message" do
+      flash.now[:success].should eq I18n.t('queue.clear.success')
+    end
+
+    it "should redirect to the correct path" do
+      response.should redirect_to root_path
+    end
+  end
 end
