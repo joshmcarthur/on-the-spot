@@ -11,9 +11,13 @@ $running = true
 
 
 Signal.trap("TERM") do 
+  QueuedTrack.stop!
   $running = false
-  $player.stop
-  $redis.del "currently_playing"
+end
+
+Signal.trap("SIGINT") do
+  QueuedTrack.stop!
+  $running = false
 end
 
 while($running and $player) do

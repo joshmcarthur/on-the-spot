@@ -72,6 +72,18 @@ describe QueuedTrack do
     end
   end
 
+  describe "#stop!" do
+    it "should clear the currently playing track" do
+      $redis.should_receive(:del).with("currently_playing")
+      QueuedTrack.stop!
+    end
+
+    it "should stop the player" do
+      $player.should_receive(:stop).and_return(nil)
+      QueuedTrack.stop!
+    end
+  end
+
   describe "#play!" do
     before :each do
       PrivatePub.stub!(:publish_to)

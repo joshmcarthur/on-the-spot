@@ -11,7 +11,7 @@ class QueuedTrack
 
   def self.present?(uri)
     # FIXME Loop through queue
-    return false unless $redis.get @@queue_name
+    return false unless $redis.mget @@queue_name.compact
     $redis.lrange(@@queue_name, 0, -1).each do |value|
       return true if value == uri
     end
@@ -34,6 +34,11 @@ class QueuedTrack
   def self.create(uri)
     return false if self.present?(uri)
     return $redis.rpush @@queue_name, uri
+  end
+
+  def self.stop!
+    $player.stop
+    $redis.del "currently_playing"
   end
 
   def self.play!(track)

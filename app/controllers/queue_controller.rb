@@ -27,8 +27,7 @@ class QueueController < ApplicationController
   end
 
   def clear
-    # Try and stop the current track
-    $player.stop
+    QueuedTrack.stop!
 
     # Clear the queue
     $redis.del "play_queue"
