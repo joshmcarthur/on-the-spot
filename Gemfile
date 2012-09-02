@@ -34,7 +34,4 @@ group :development, :test do
   gem 'capistrano'
 end
 
-group :test do
-  gem 'fakeredis'
-end
 

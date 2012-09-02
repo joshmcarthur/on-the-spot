@@ -73,8 +73,6 @@ GEM
     eventmachine (1.0.0.rc.4)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    fakeredis (0.3.2)
-      redis (~> 2.2.0)
     faye (0.8.3)
       cookiejar (>= 0.3.0)
       em-http-request (>= 0.3.0)
@@ -233,7 +231,6 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   daemons-rails
   debugger
-  fakeredis
   foreman
   guard
   guard-rspec
