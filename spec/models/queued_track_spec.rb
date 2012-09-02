@@ -61,14 +61,14 @@ describe QueuedTrack do
     end
   end
 
-  describe "#next" do
+  describe "#upcoming" do
     before :each do
       subject.create(track)
     end
 
     it "should return an array of upcoming tracks" do
-      subject.next(1).size.should eq 1
-      subject.next(1).first.name.should eq subject.find(track).name
+      subject.upcoming(1).size.should eq 1
+      subject.upcoming(1).first.name.should eq subject.find(track).name
     end
   end
 

@@ -10,7 +10,7 @@ class QueueController < ApplicationController
 
   def index
     @current = QueuedTrack.find($redis.get("currently_playing"))
-    @next    = QueuedTrack.next(3)
+    @next    = QueuedTrack.upcoming(3)
     
     render
   end

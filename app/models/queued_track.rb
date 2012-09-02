@@ -19,7 +19,7 @@ class QueuedTrack
     return false
   end
 
-  def self.next(count = 3)
+  def self.upcoming(count = 3)
     upcoming = []
 
     # We want to look at the beginning of the queue and pop things off there
@@ -28,7 +28,11 @@ class QueuedTrack
     end 
 
     upcoming.compact
-  end 
+  end
+
+  def self.next
+    $redis.lpop @@queue_name
+  end
 
 
   def self.create(uri)
@@ -67,6 +71,9 @@ class QueuedTrack
 
     # Broadcast that we are no longer playing the track
     PrivatePub.publish_to "/tracks/new", :stopped => true
+
+    # Add the song that played onto the historic track queue
+    PreviousTrack.create(track.uri)
 
     # Clear the currently playing track
     $redis.del "currently_playing"
