@@ -23,7 +23,7 @@ class QueuedTrack
     upcoming = []
 
     # We want to look at the beginning of the queue and pop things off there
-    (0..count).to_a.each do |index|
+    (0...count).to_a.each do |index|
       upcoming << self.find($redis.lindex(@@queue_name, index))
     end 
 
