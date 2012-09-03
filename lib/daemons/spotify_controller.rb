@@ -22,7 +22,7 @@ end
 
 while($running and $player) do
 
-  while uri = $redis.lpop("play_queue")
+  while uri = QueuedTrack.next || PreviousTrack.next
     # Only continue if the URI looks like a spotify one
     # Thus far, we understand"
     # * spotify:track:121212121
