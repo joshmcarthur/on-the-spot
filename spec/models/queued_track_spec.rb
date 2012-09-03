@@ -72,6 +72,13 @@ describe QueuedTrack do
     end
   end
 
+  describe "#next" do
+    it "should return the next track to play" do
+      subject.create(track)
+      subject.next.should eq track
+    end
+  end
+
   describe "#stop!" do
     it "should clear the currently playing track" do
       $redis.should_receive(:del).with("currently_playing")
