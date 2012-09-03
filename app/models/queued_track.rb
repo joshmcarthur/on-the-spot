@@ -11,7 +11,7 @@ class QueuedTrack
 
   def self.present?(uri)
     # FIXME Loop through queue
-    return false unless $redis.mget @@queue_name.compact
+    return false unless $redis.mget @@queue_name
     $redis.lrange(@@queue_name, 0, -1).each do |value|
       return true if value == uri
     end
