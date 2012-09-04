@@ -31,6 +31,7 @@ class QueueController < ApplicationController
 
     # Clear the queue
     $redis.del "play_queue"
+    $redis.del "previous_tracks"
 
     flash[:success] = I18n.t('queue.clear.success')
     redirect_to root_path
