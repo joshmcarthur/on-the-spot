@@ -22,7 +22,7 @@ end
 
 while($running and $player) do
 
-  while uri = QueuedTrack.next || PreviousTrack.next
+  while uri = QueuedTrack.next || (PreviousTrack.enough?? PreviousTrack.next : nil)
     # Only continue if the URI looks like a spotify one
     # Thus far, we understand"
     # * spotify:track:121212121
