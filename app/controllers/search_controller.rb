@@ -15,7 +15,7 @@ class SearchController < ApplicationController
             :album => track.album.name,
             :popularity => track.popularity,
             :uri => track.to_link.to_str,
-            :duration => Time.at(track.duration).utc.strftime("%-Mm %Ss")
+            :duration => track.duration_string
           }
         end
       }

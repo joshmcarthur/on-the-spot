@@ -16,6 +16,7 @@
 
 		<h2 class="artist_name">
 			<%= @current.artists.first.name %>
+			 - <%= @current.duration_string %>
 		</h2>
 		<% else %>
 		<h2 class="nothing">
@@ -38,7 +39,7 @@
 			<% @next.each_with_index do |track, index| %>
 				<li>
 					<h1><span class="number"><%= index + 1 %></span> - <%= track.name %></h1>
-					<h2><%= track.artists.first.name %> (<%= track.album.name %>)</h2>
+					<h2><%= track.artists.first.name %> (<%= track.album.name %>) - <%= track.duration_string %></h2>
 				</li>
 			<% end %>
 		</ul>
