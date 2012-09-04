@@ -10,7 +10,7 @@ class PreviousTrack
 
   def self.present?(uri)
     # FIXME Loop through queue
-    return false unless $redis.mget self.queue_name.compact
+    return false unless $redis.mget self.queue_name
     $redis.lrange(self.queue_name, 0, -1).each do |value|
       return true if value == uri
     end
