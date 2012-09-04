@@ -2,7 +2,9 @@
 # my own business rules 
 class QueuedTrack
 
-  @@queue_name = "play_queue"
+  cattr_accessor :queue_name do
+    "play_queue"
+  end
 
   def self.find(uri)
     return unless uri.is_a?(String)
@@ -11,8 +13,8 @@ class QueuedTrack
 
   def self.present?(uri)
     # FIXME Loop through queue
-    return false unless $redis.mget @@queue_name.compact
-    $redis.lrange(@@queue_name, 0, -1).each do |value|
+    return false unless $redis.mget self.queue_name
+    $redis.lrange(self.queue_name, 0, -1).each do |value|
       return true if value == uri
     end
 
@@ -24,20 +26,20 @@ class QueuedTrack
 
     # We want to look at the beginning of the queue and pop things off there
     (0..count).to_a.each do |index|
-      upcoming << self.find($redis.lindex(@@queue_name, index))
+      upcoming << self.find($redis.lindex(self.queue_name, index))
     end 
 
     upcoming.compact
   end
 
   def self.next
-    $redis.lpop @@queue_name
+    $redis.lpop self.queue_name
   end
 
 
   def self.create(uri)
     return false if self.present?(uri)
-    return $redis.rpush @@queue_name, uri
+    return $redis.rpush self.queue_name, uri
   end
 
   def self.stop!

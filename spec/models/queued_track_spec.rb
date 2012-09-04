@@ -7,7 +7,7 @@ describe QueuedTrack do
   end
 
   before :each do
-    $redis.del "play_queue"
+    $redis.del QueuedTrack.queue_name
   end
 
   describe "#find" do
