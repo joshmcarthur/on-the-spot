@@ -70,7 +70,7 @@ describe PreviousTrack do
       end
 
       it "should return the index of the track" do
-        subject.create(track).should be_a(Integer)
+        subject.create(track).should be_true
       end
     end
   end
