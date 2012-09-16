@@ -1,4 +1,12 @@
 class PreviousTrack
+
+# PreviousTrack works very much like a QueuedTrack, except
+# it uses a set rather than a list in Redis. The reason for this
+# is that a SET provides more capability and is more efficient,
+# and most importantly allows us a pop random elements out of the set
+# A queued track must use a list because order is important there - it
+# is not here
+
   cattr_accessor :queue_name do
     "previous_tracks"
   end
@@ -11,24 +19,19 @@ class PreviousTrack
   def self.present?(uri)
     # FIXME Loop through queue
     return false unless $redis.mget self.queue_name
-    $redis.lrange(self.queue_name, 0, -1).each do |value|
-      return true if value == uri
-    end
-
-    return false
+    return $redis.sismember self.queue_name, uri
   end
 
   def self.enough?
-    return $redis.llen(self.queue_name) >= self.minimum_queue_length
+    return $redis.scard(self.queue_name) >= self.minimum_queue_length
   end
 
   def self.create(uri)
     return false if self.present?(uri)
-    return $redis.rpush self.queue_name, uri
+    $redis.sadd self.queue_name, uri
   end
 
   def self.next
-    $redis.lpop self.queue_name
+    $redis.spop self.queue_name
   end
-
 end
