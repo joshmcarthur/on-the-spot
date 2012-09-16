@@ -27,7 +27,6 @@ class QueueController < ApplicationController
   end
 
   def clear
-    QueuedTrack.stop!
 
     # Clear the queue
     $redis.del QueuedTrack.queue_name
