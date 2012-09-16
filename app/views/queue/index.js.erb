@@ -1,0 +1,4 @@
+$('#queue').modal('hide')
+$('#queue').remove()
+$('body').append("<%= escape_javascript(render(:template => 'queue/index', :formats => [:html], :layout => nil)) %>");
+$('#queue').modal('show')

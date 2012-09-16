@@ -45,21 +45,9 @@
     </nav>
     <header class="brand">
       <h1>On the Spot</h1>
-      <h2 id="nav_search">
-        <%= 
-          link_to_unless_current 'Search', search_index_path do
-            content_tag(:span, 'Search')
-          end
-        %>
-      </h2>
+      <h3 id="queue_link">
 
-      <h2 id="nav_queue">
-        <%= 
-          link_to_unless_current 'Queue', queue_index_path do
-            content_tag(:span, 'Queue')
-          end
-        %>
-      </h2>
+      </h3>
     </header>
 
     <div class="container-fluid">

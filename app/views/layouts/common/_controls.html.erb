@@ -9,6 +9,11 @@
 		Unmute
 	<% end %>
 
+	<%= link_to queue_index_path, :remote => true do %>
+		<%= content_tag :i, '', :class => 'icon-list' %>
+		Show Queue
+	<% end %>
+
 	<%= link_to clear_queue_index_path, :method => :delete, :title => 'Clear Queue' do %>
 		<%= content_tag :i, '', :class => 'icon-signout' %>
 		Clear Queue
