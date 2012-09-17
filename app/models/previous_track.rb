@@ -12,7 +12,7 @@ class PreviousTrack
   end
 
   cattr_accessor :minimum_queue_length do
-    5
+    15
   end
 
 
