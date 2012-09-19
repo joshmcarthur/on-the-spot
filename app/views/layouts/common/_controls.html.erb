@@ -1,22 +1,43 @@
-<div id="controls span8 offset2">
-	<%= link_to mute_player_path, :method => :post, :remote => true, :id => 'mute', :title => "Mute Sound" do %>
-		<%= content_tag :i, '', :class => 'icon-volume-off' %>
-		Mute
-	<% end %>
+<div id="controls" class="row-fluid">
+	<div class="navbar span8">
+  		<div class="navbar-inner">
+  			<a id="now_playing" class="brand">
+  				<%= image_tag '', :class => 'pull-left' %>
+  				<%= content_tag :i, '', :rel => 'tooltip', :title => "Now Playing", :class => 'icon-play-circle' %>&nbsp;
+  				<span>[Nothing Playing]</span>
+  			</a>
 
-	<%= link_to unmute_player_path, :method => :post, :remote => true, :id => 'unmute', :title => "Un-Mute Sound" do %>
-		<%= content_tag :i, '', :class => 'icon-volume-up' %>
-		Unmute
-	<% end %>
+		    <ul class="nav pull-right">
 
-	<%= link_to queue_index_path, :remote => true do %>
-		<%= content_tag :i, '', :class => 'icon-list' %>
-		Show Queue
-	<% end %>
 
-	<%= link_to clear_queue_index_path, :method => :delete, :title => 'Clear Queue' do %>
-		<%= content_tag :i, '', :class => 'icon-signout' %>
-		Clear Queue
-	<% end %>
+				<%= content_tag :li do %>
+					<%= link_to mute_player_path, :method => :post, :remote => true, :id => 'mute', :title => "Mute Sound" do %>
+						<%= content_tag :i, '', :class => 'icon-volume-off' %>
+						Mute
+					<% end %>
+				<% end %>
 
+				<%= content_tag :li do %>
+					<%= link_to unmute_player_path, :method => :post, :remote => true, :id => 'unmute', :title => "Unmute Sound" do %>
+						<%= content_tag :i, '', :class => 'icon-volume-off' %>
+						Unmute
+					<% end %>
+				<% end %>
+
+				<%= content_tag :li do %>
+					<%= link_to clear_queue_index_path, :method => :delete, :title => 'Clear Queue' do %>
+						<%= content_tag :i, '', :class => 'icon-signout' %>
+						Clear Queue
+					<% end %>
+				<% end %>
+
+		    	<%= content_tag :li do %>
+					<%= link_to queue_index_path, :remote => true, :title => 'Show Queued Tracks' do %>
+						<%= content_tag :i, '', :class => 'icon-list' %>
+						Show Queue
+					<% end %>	    		
+				<% end %>
+    		</ul>
+  		</div>
+	</div>
 </div>
