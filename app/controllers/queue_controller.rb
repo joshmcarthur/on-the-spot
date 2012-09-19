@@ -5,7 +5,8 @@ class QueueController < ApplicationController
 
   def current
     @current = QueuedTrack.find($redis.get("currently_playing"))
-    render :text => @current.try(:name)
+    render :json => {} and return unless @current
+    render :json => {:name => @current.name, :image_data => @current.cover_image} 
   end
 
   def index

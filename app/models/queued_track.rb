@@ -59,7 +59,7 @@ class QueuedTrack
 
     begin
       # Broadcast the playing track
-      PrivatePub.publish_to "/tracks/new", :track => track.name 
+      PrivatePub.publish_to "/tracks/new", :track => {:name => track.name, :image_data => track.cover_image}
 
       $player.load(track)
       # Play the track
