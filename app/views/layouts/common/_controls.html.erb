@@ -1,43 +1,57 @@
 <div id="controls" class="row-fluid">
 	<div class="navbar span8">
   		<div class="navbar-inner">
-  			<a id="now_playing" class="brand">
-  				<%= image_tag '', :class => 'pull-left' %>
-  				<%= content_tag :i, '', :rel => 'tooltip', :title => "Now Playing", :class => 'icon-play-circle' %>&nbsp;
-  				<span>[Nothing Playing]</span>
-  			</a>
+  			<div class="container">
 
-		    <ul class="nav pull-right">
+  				<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+  				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+  					<span class="icon-bar"></span>
+  					<span class="icon-bar"></span>
+  					<span class="icon-bar"></span>
+  				</a>
 
+  				<a id="now_playing" class="brand">
+  					<%= image_tag '', :class => 'pull-left' %>
+  					<%= content_tag :i, '', :rel => 'tooltip', :title => "Now Playing", :class => 'icon-play-circle' %>&nbsp;
+  					<span>[Nothing Playing]</span>
+  				</a>
 
-				<%= content_tag :li do %>
-					<%= link_to mute_player_path, :method => :post, :remote => true, :id => 'mute', :title => "Mute Sound" do %>
-						<%= content_tag :i, '', :class => 'icon-volume-off' %>
-						Mute
-					<% end %>
-				<% end %>
+  				<div class="nav-collapse">
+  					<ul class="nav pull-right">
 
-				<%= content_tag :li do %>
-					<%= link_to unmute_player_path, :method => :post, :remote => true, :id => 'unmute', :title => "Unmute Sound" do %>
-						<%= content_tag :i, '', :class => 'icon-volume-off' %>
-						Unmute
-					<% end %>
-				<% end %>
+  						<li class="divider-vertical"></li>
+  						<%= content_tag :li do %>
+  						<%= link_to mute_player_path, :method => :post, :remote => true, :id => 'mute', :title => "Mute Sound" do %>
+  						<%= content_tag :i, '', :class => 'icon-volume-off' %>
+  						Mute
+  						<% end %>
+  						<% end %>
 
-				<%= content_tag :li do %>
-					<%= link_to clear_queue_index_path, :method => :delete, :title => 'Clear Queue' do %>
-						<%= content_tag :i, '', :class => 'icon-signout' %>
-						Clear Queue
-					<% end %>
-				<% end %>
+  						<%= content_tag :li do %>
+  						<%= link_to unmute_player_path, :method => :post, :remote => true, :id => 'unmute', :title => "Unmute Sound" do %>
+  						<%= content_tag :i, '', :class => 'icon-volume-off' %>
+  						Unmute
+  						<% end %>
+  						<% end %>
 
-		    	<%= content_tag :li do %>
-					<%= link_to queue_index_path, :remote => true, :title => 'Show Queued Tracks' do %>
-						<%= content_tag :i, '', :class => 'icon-list' %>
-						Show Queue
-					<% end %>	    		
-				<% end %>
-    		</ul>
+  						<li class="divider-vertical"></li>
+  						<%= content_tag :li do %>
+  						<%= link_to clear_queue_index_path, :method => :delete, :title => 'Clear Queue' do %>
+  						<%= content_tag :i, '', :class => 'icon-signout' %>
+  						Clear Queue
+  						<% end %>
+  						<% end %>
+
+  						<li class="divider-vertical"></li>
+  						<%= content_tag :li do %>
+  						<%= link_to queue_index_path, :remote => true, :title => 'Show Queued Tracks' do %>
+  						<%= content_tag :i, '', :class => 'icon-list' %>
+  						Show Queue
+  						<% end %>	    		
+  						<% end %>
+  					</ul>
+  				</div>
+  			</div>
   		</div>
 	</div>
 </div>
