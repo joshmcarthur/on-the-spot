@@ -39,16 +39,16 @@
     <%= yield :head %>
   </head>
   <body>
-    <nav class="main">
-      <%= render 'layouts/common/controls' %>
-      <%= render 'layouts/common/now_playing' %>
-    </nav>
     <header class="brand">
       <h1>On the Spot</h1>
       <h3 id="queue_link">
 
       </h3>
     </header>
+
+    <div class="container-fluid">
+      <%= render 'layouts/common/controls' %>
+    </div>
 
     <div class="container-fluid">
       <%= render :partial => 'layouts/common/flashes' %>
