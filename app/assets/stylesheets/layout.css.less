@@ -2,45 +2,15 @@
 body { 
 	background: transparent image-url('background.gif');
 
-	nav {
-		#now_playing, #controls {
-			position: fixed;
-			top: 0px;
-			right: 0px;
-			background: white;
-			padding: 0.5%;
-			box-shadow: 0px 0px 10px #888;
-			color: #333;
+	#controls > .navbar {
+		margin-left: 17%;
 
-			i {
-				font-size: 120%;
-			}
-		}
-
-		#controls {
-			top: auto;
-			bottom: 0px;
-			left: 0px;
-			width: 270px;
-			line-height: 20px;
-
-
-			a {
-				padding-right: 5px;
-				color: #222;
-
-				transition: color 1s linear;
-
-				&:hover {
-					text-decoration: none;
-				}
-
-
-			}
+		img {
+			height: 0px;
 		}
 	}
 
-	.brand {
+	header {
 		background-color: white;
 		.heading_bubble(200px);
 		margin: 1% auto 5%;
