@@ -16,12 +16,14 @@ describe QueueController do
     it "should return the currently playing track when one is playing" do
       $redis.set "currently_playing", track_uri
       get :current
-      response.body.should eq QueuedTrack.find(track_uri).name
+      track = QueuedTrack.find(track_uri)
+      json = {:name => track.name, :image_data => track.cover_image}.to_json
+      response.body.should eq json
     end
 
     it "should return an empty string when no track is playing"  do
       get :current
-      response.body.should be_blank
+      JSON.parse(response.body).should eq({})
     end
   end
 
