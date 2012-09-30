@@ -17,8 +17,8 @@ OnTheSpot.Queue = {
 		, 'html'
 
 	setCurrent: (track) ->
-		console.log(track)
 		if track.name
+			OnTheSpot.Notification.trackPlaying(track)
 			$('#now_playing > span').text(track.name)
 			$('#now_playing > img').attr('src', track.image_data)
 			$('#now_playing > img').css('height', "#{$('#now_playing > span').height()}px")
