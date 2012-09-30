@@ -8,7 +8,6 @@ OnTheSpot.Notification = {
 
 	requestAccess: ->
 		window.notifications.requestPermission();
-		window.location.reload()
 
 	trackPlaying: (track) ->
 		return unless OnTheSpot.Notification.supported == true
