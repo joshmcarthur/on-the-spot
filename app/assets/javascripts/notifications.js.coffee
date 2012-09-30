@@ -10,7 +10,7 @@ OnTheSpot.Notification = {
 		window.notifications.requestPermission();
 
 	trackPlaying: (track) ->
-		return unless OnTheSpot.Notification.supported == true
+		return unless OnTheSpot.Notification.supported == true && track
 
 		window.notifications.createNotification(
 			'/assets/apple-touch-icon-precomposed.png', 
