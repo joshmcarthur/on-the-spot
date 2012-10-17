@@ -7,7 +7,13 @@
 $ ->
 	$('.play-btn').live 'click', ->
 		row = $(this).closest('li')
-		OnTheSpot.Queue.add({name: row.text(), uri: row.data('uri')})
+
+		if trackDangerZone(row)
+			if confirm("Woah, looks like a karaoke track you've got there. Are you sure?")
+				OnTheSpot.Queue.add({name: row.text(), uri: row.data('uri')})
+		else
+			OnTheSpot.Queue.add({name: row.text(), uri: row.data('uri')})
+
 	$('#controls a').tooltip(placement: 'bottom')
 
 	$('a.search_example').click autofillSearch
@@ -89,4 +95,8 @@ processTracks = (raw_tracks) ->
 
 	$('.icon-music').tooltip()
 
+trackDangerZone = (track_row) ->
+	danger_rows = track_row.filter ->
+		/karaoke/gi.test $(this).text()
 
+	return danger_rows.length > 0
