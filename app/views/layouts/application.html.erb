@@ -36,6 +36,10 @@
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 
+    <!-- OpenSearch Description -->
+    <link type="application/opensearchdescription+xml" rel="search"
+       href="<%= asset_path 'opensearch.xml' %>"/>
+
     <%= yield :head %>
   </head>
   <body>
