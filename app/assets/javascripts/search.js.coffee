@@ -5,6 +5,8 @@
 
 
 $ ->
+	searchFromParams()
+
 	$('.play-btn').live 'click', ->
 		row = $(this).closest('li')
 
@@ -69,7 +71,7 @@ processTracks = (raw_tracks) ->
 	tracks = _.map tracks, (track) ->
 		$("<li></li>")
 		.append($('<span></span>').addClass('track').text(track.name))
-		.append($('<span></span>').addClass('artist').text(" - #{track.artist}")) 
+		.append($('<span></span>').addClass('artist').text(" - #{track.artist}"))
 		.append($('<span></span>').addClass('album').text(" (#{track.album})"))
 		.append($('<span></span>').addClass('duration').text(" - #{track.duration}"))
 		.data('popularity', track.popularity)
@@ -89,7 +91,7 @@ processTracks = (raw_tracks) ->
 
 	return if collection.length == 0
 	$('#tracks').empty()
-	_.each collection, (item) -> 
+	_.each collection, (item) ->
 		$('#tracks').append(item)
 
 
@@ -100,3 +102,11 @@ trackDangerZone = (track_row) ->
 		/karaoke/gi.test $(this).text()
 
 	return danger_rows.length > 0
+
+searchFromParams = ->
+	if search = $.parseParams(window.location.search.split('?')[1]).q
+		$('input#search').val(search)
+		# Changing val doesn't seem to trigger the keyup
+		setTimeout("$('input#search').trigger('keyup')", 500)
+
+
