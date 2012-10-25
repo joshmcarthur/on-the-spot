@@ -27,7 +27,7 @@ describe QueuedTrack do
       end
 
       it "should return true" do
-        subject.present?(track).should be_true
+        subject.present?(track).should be_a(Fixnum)
       end
     end
 
@@ -52,7 +52,7 @@ describe QueuedTrack do
     context "track is not already queued" do
       it "should add the track to the queue" do
         subject.create(track)
-        subject.present?(track).should be_true
+        subject.present?(track).should_not be_false
       end
 
       it "should return the index of the track" do
@@ -103,7 +103,8 @@ describe QueuedTrack do
     end
 
     it "should post a notification that the track is playing" do
-      PrivatePub.should_receive(:publish_to).with("/tracks/new", {:track => subject.find(track).name})
+      track = subject.find(track)
+      PrivatePub.should_receive(:publish_to).with("/tracks/new",  :track => {:name => track.name, :image_data => track.cover_image})
       QueuedTrack.play!(track)
     end
 

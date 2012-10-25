@@ -1,5 +1,5 @@
 # QueuedTrack: Just a wrapper class around MetaSpotify and Hallon to provide
-# my own business rules 
+# my own business rules
 class QueuedTrack
 
   cattr_accessor :queue_name do
@@ -14,8 +14,8 @@ class QueuedTrack
   def self.present?(uri)
     # FIXME Loop through queue
     return false unless $redis.mget self.queue_name
-    $redis.lrange(self.queue_name, 0, -1).each do |value|
-      return true if value == uri
+    $redis.lrange(self.queue_name, 0, -1).each do |index, value|
+      return index if value == uri
     end
 
     return false
@@ -27,13 +27,35 @@ class QueuedTrack
     # We want to look at the beginning of the queue and pop things off there
     (0...count).to_a.each do |index|
       upcoming << self.find($redis.lindex(self.queue_name, index))
-    end 
+    end
 
     upcoming.compact
   end
 
   def self.next
     $redis.lpop self.queue_name
+  end
+
+  def self.upvote!(uri)
+    return unless track_index = self.present?(uri)
+
+    # In single transaction:
+    # Get index of this uri
+    # Remove uri
+    # Insert again before the index we used to know
+
+    $redis.multi do
+      # Urgh, there's no remove by ID
+      # Let's set a value, and then delete that by value
+      Time.now.to_i.tap do |timestamp|
+        $redis.lset track_index, timestamp
+        $redis.lrem timestamp
+      end
+
+      $redis.linsert self.queue_name, track_index, uri
+    end
+
+    track_index
   end
 
 
