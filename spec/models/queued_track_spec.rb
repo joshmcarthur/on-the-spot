@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe QueuedTrack do
   let(:track) { "spotify:track:2ViEnnYXmb3Bm0s7XdqWdY" }
+  let(:other_track) { "spotify:track:4NFtDCckVMiC2eKwYGoChl" }
+
   subject do
     QueuedTrack
   end
@@ -61,6 +63,40 @@ describe QueuedTrack do
     end
   end
 
+  describe "#upvote!" do
+    context "track is last in the queue" do
+      before do
+        subject.create(other_track)
+        subject.create(track)
+        subject.upvote!(track)
+      end
+
+      it "should be first in the queue" do
+        subject.index(track).should eq 0
+      end
+
+      it "should have pushed the other track to the next position down" do
+        subject.index(other_track).should eq 1
+      end
+    end
+
+    context "track is first in the queue" do
+      before do
+        subject.create(track)
+        subject.create(other_track)
+        subject.upvote!(track)
+      end
+
+      it "should still be first in the queue" do
+        subject.index(track).should eq 0
+      end
+
+      it "should not have affected the position of the other track" do
+        subject.index(other_track).should eq 1
+      end
+    end
+  end
+
   describe "#upcoming" do
     before :each do
       subject.create(track)
@@ -103,8 +139,8 @@ describe QueuedTrack do
     end
 
     it "should post a notification that the track is playing" do
-      track = subject.find(track)
-      PrivatePub.should_receive(:publish_to).with("/tracks/new",  :track => {:name => track.name, :image_data => track.cover_image})
+      loaded_track = subject.find(track)
+      PrivatePub.should_receive(:publish_to).with("/tracks/new",  :track => {:name => loaded_track.name, :image_data => loaded_track.cover_image})
       QueuedTrack.play!(track)
     end
 

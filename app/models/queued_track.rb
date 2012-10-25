@@ -6,6 +6,7 @@ class QueuedTrack
     "play_queue"
   end
 
+
   def self.find(uri)
     return unless uri.is_a?(String)
     Hallon::Track.new(uri).load
@@ -14,11 +15,17 @@ class QueuedTrack
   def self.present?(uri)
     # FIXME Loop through queue
     return false unless $redis.mget self.queue_name
-    $redis.lrange(self.queue_name, 0, -1).each do |index, value|
+    $redis.lrange(self.queue_name, 0, -1).each_with_index do |value, index|
       return index if value == uri
     end
 
     return false
+  end
+
+  # Lazy alias
+  def self.index(uri)
+    index = self.present?(uri)
+    index ? index : nil
   end
 
   def self.upcoming(count = 3)
@@ -39,6 +46,9 @@ class QueuedTrack
   def self.upvote!(uri)
     return unless track_index = self.present?(uri)
 
+    # We can't upvote a track that's already first in the queue
+    return if track_index < 1
+
     # In single transaction:
     # Get index of this uri
     # Remove uri
@@ -48,11 +58,12 @@ class QueuedTrack
       # Urgh, there's no remove by ID
       # Let's set a value, and then delete that by value
       Time.now.to_i.tap do |timestamp|
-        $redis.lset track_index, timestamp
-        $redis.lrem timestamp
-      end
+        $redis.lset self.queue_name, track_index, timestamp
+        $redis.lrem self.queue_name, -1, timestamp
 
-      $redis.linsert self.queue_name, track_index, uri
+        next_track = $redis.lindex self.queue_name, track_index - 1
+        $redis.linsert self.queue_name, "BEFORE", next_track, uri
+      end
     end
 
     track_index
