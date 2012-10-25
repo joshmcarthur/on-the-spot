@@ -4,7 +4,7 @@ describe PlayerController do
 
   describe "POST mute" do
     it "should respond with mute" do
-      PrivatePub.should_receive(:publish_to).with("/player/state", {:state => "muted"}).and_return(true)
+      PrivatePub.should_receive(:publish_to).with("/player/status", {:state => "muted"}).and_return(true)
       post :mute
       response.should eq "mute"
     end
@@ -12,7 +12,7 @@ describe PlayerController do
 
   describe "POST unmute" do
     it "should response with unmute" do
-      PrivatePub.should_receive(:publish_to).with("/player/state", {:state => "unmuted"}).and_return(true)
+      PrivatePub.should_receive(:publish_to).with("/player/status", {:state => "unmuted"}).and_return(true)
       post :unmute
       response.should eq "unmute"
     end
