@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe QueuedTrack do
   let(:track) { "spotify:track:2ViEnnYXmb3Bm0s7XdqWdY" }
+  let(:other_track) { "spotify:track:4NFtDCckVMiC2eKwYGoChl" }
+
   subject do
     QueuedTrack
   end
@@ -27,7 +29,7 @@ describe QueuedTrack do
       end
 
       it "should return true" do
-        subject.present?(track).should be_true
+        subject.present?(track).should be_a(Fixnum)
       end
     end
 
@@ -52,11 +54,45 @@ describe QueuedTrack do
     context "track is not already queued" do
       it "should add the track to the queue" do
         subject.create(track)
-        subject.present?(track).should be_true
+        subject.present?(track).should_not be_false
       end
 
       it "should return the index of the track" do
         subject.create(track).should be_a(Integer)
+      end
+    end
+  end
+
+  describe "#upvote!" do
+    context "track is last in the queue" do
+      before do
+        subject.create(other_track)
+        subject.create(track)
+        subject.upvote!(track)
+      end
+
+      it "should be first in the queue" do
+        subject.index(track).should eq 0
+      end
+
+      it "should have pushed the other track to the next position down" do
+        subject.index(other_track).should eq 1
+      end
+    end
+
+    context "track is first in the queue" do
+      before do
+        subject.create(track)
+        subject.create(other_track)
+        subject.upvote!(track)
+      end
+
+      it "should still be first in the queue" do
+        subject.index(track).should eq 0
+      end
+
+      it "should not have affected the position of the other track" do
+        subject.index(other_track).should eq 1
       end
     end
   end
@@ -103,7 +139,8 @@ describe QueuedTrack do
     end
 
     it "should post a notification that the track is playing" do
-      PrivatePub.should_receive(:publish_to).with("/tracks/new", {:track => subject.find(track).name})
+      loaded_track = subject.find(track)
+      PrivatePub.should_receive(:publish_to).with("/tracks/new",  :track => {:name => loaded_track.name, :image_data => loaded_track.cover_image})
       QueuedTrack.play!(track)
     end
 

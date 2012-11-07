@@ -6,13 +6,13 @@ class QueueController < ApplicationController
   def current
     @current = QueuedTrack.find($redis.get("currently_playing"))
     render :json => {} and return unless @current
-    render :json => {:name => @current.name, :image_data => @current.cover_image} 
+    render :json => {:name => @current.name, :image_data => @current.cover_image}
   end
 
   def index
     @current = QueuedTrack.find($redis.get("currently_playing"))
     @next    = QueuedTrack.upcoming(3)
-    
+
     render
   end
 
@@ -27,11 +27,16 @@ class QueueController < ApplicationController
     render
   end
 
+  def upvote
+    QueuedTrack.upvote!(params[:id])
+    redirect_to root_path
+  end
+
   def clear
 
     # Clear the queue
     $redis.del QueuedTrack.queue_name
-    $redis.del PreviousTrack.queue_name 
+    $redis.del PreviousTrack.queue_name
 
     flash[:success] = I18n.t('queue.clear.success')
     redirect_to root_path

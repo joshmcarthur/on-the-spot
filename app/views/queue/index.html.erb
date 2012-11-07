@@ -40,8 +40,19 @@
   	<ul id="upcoming" class="unstyled">
   		<% @next.each_with_index do |track, index| %>
   		<li>
-  			<h1><span class="number"><%= index + 1 %></span> - <%= track.name %></h1>
-  			<h2><%= track.artists.first.name %> (<%= track.album.name %>) - <%= track.duration_string %></h2>
+        <section class="track_meta pull-left">
+  			<h1><%= track.name %></h1>
+        <h2>
+          <span class="artist"><%= track.artists.first.name %></span>
+          &mdash;
+          <span class="duration"><%= track.duration_string %></span>
+        </h2>
+      </section>
+
+        <%= link_to upvote_queue_path(track.uri), :method => :put, :class => 'upvote-toggle pull-right' do %>
+          <%= glyph(:'chevron-up') %>
+        <% end unless index == 0 %>
+        <div class="clearfix"></div>
   		</li>
   		<% end %>
   	</ul>
