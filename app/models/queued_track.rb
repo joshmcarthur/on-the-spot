@@ -54,16 +54,13 @@ class QueuedTrack
     # Remove uri
     # Insert again before the index we used to know
 
-    $redis.multi do
-      # Urgh, there's no remove by ID
-      # Let's set a value, and then delete that by value
-      Time.now.to_i.tap do |timestamp|
-        $redis.lset self.queue_name, track_index, timestamp
-        $redis.lrem self.queue_name, -1, timestamp
-
-        next_track = $redis.lindex self.queue_name, track_index - 1
-        $redis.linsert self.queue_name, "BEFORE", next_track, uri
-      end
+    # Urgh, there's no remove by ID
+    # Let's set a value, and then delete that by value
+    Time.now.to_i.tap do |timestamp|
+      $redis.lset self.queue_name, track_index, timestamp
+      next_track = $redis.lindex self.queue_name, track_index - 1
+      $redis.lrem self.queue_name, 0, timestamp
+      $redis.linsert self.queue_name, "BEFORE", next_track, uri
     end
 
     track_index
