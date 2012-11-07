@@ -3,6 +3,7 @@ OnTheSpot::Application.routes.draw do
   resources :queue do
     get :current, :on => :collection
     delete :clear, :on => :collection
+    put :upvote, :on => :member
   end
 
   resource :player, :only => [], :controller => 'player' do
@@ -10,6 +11,6 @@ OnTheSpot::Application.routes.draw do
     post :unmute
     get :status
   end
-  
+
   root :to => 'search#index'
 end
