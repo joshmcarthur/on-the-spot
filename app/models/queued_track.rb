@@ -12,6 +12,11 @@ class QueuedTrack
     Hallon::Track.new(uri).load
   end
 
+  def self.filtered?(track)
+    track_string = [track.name, track.artist.name].join ' '
+    OnTheSpot::Application.config.track_filters.any? { |filter| track_string =~ filter }
+  end 
+
   def self.present?(uri)
     # FIXME Loop through queue
     return false unless $redis.mget self.queue_name
@@ -83,6 +88,9 @@ class QueuedTrack
 
     # Load the track
     track = Hallon::Track.new(track).load
+
+    # Skip the track if it matches any of our filters
+    return false if self.filtered?(track)
 
     # log the playing track
     Rails.logger.info "Start Playing: #{track.name}"

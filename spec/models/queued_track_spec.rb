@@ -22,6 +22,27 @@ describe QueuedTrack do
     end
   end
 
+  describe "#filtered" do
+    let(:track) do
+      OpenStruct.new.tap do |os|
+        os.name = "Test"
+        os.artist = OpenStruct.new(:name => "Artist")
+      end
+    end
+
+    context "filters match track" do
+      before do
+        OnTheSpot::Application.config.stub!(:track_filters).and_return([ /Test/i ])
+      end
+
+      it { subject.filtered?(track).should be_true }
+    end
+
+    context "filters do not match track" do
+      it { subject.filtered?(track).should be_false }
+    end
+  end
+
   describe "#present?" do
     context "the track is present in the queue" do
       before :each do
@@ -133,13 +154,19 @@ describe QueuedTrack do
       $player.stub(:play!)
     end
 
+    let(:loaded_track) { subject.find(track) }
+
     it "should set the currently playing track" do
       $redis.should_receive(:set).with("currently_playing", track)
       QueuedTrack.play!(track)
     end
 
+    it "should ensure the track is not filtered" do
+      QueuedTrack.should_receive(:filtered?).with(loaded_track)
+      QueuedTrack.play!(track)
+    end
+
     it "should post a notification that the track is playing" do
-      loaded_track = subject.find(track)
       PrivatePub.should_receive(:publish_to).with("/tracks/new",  :track => {:name => loaded_track.name, :image_data => loaded_track.cover_image})
       QueuedTrack.play!(track)
     end
