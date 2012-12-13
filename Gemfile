@@ -26,6 +26,7 @@ gem 'meta-spotify'
 gem 'hallon'
 gem 'hallon-openal'
 gem 'private_pub'
+gem 'dnssd'
 
 group :development, :test do
   gem 'debugger'
