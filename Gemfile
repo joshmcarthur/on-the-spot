@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.7'
+gem 'rails', '~> 3.2'
 gem 'foreman'
 gem 'thin'
 
@@ -14,6 +14,7 @@ end
 
 gem 'jquery-rails'
 gem 'redis', '~> 2.2'
+gem 'json', '~> 1.7'
 gem 'hiredis'
 gem 'redis-store', '~> 1.0.0' # <- For caching
 gem 'less-rails'
