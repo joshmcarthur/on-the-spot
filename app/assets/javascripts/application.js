@@ -15,6 +15,7 @@
 //= require underscore
 //= require private_pub
 //= require bootstrap
+//= require bootstrap_hooks
 //= require jquery.parseparams
 //= require namespace
 //= require_tree .

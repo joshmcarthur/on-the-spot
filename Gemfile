@@ -15,8 +15,8 @@ end
 gem 'jquery-rails'
 gem 'hiredis'
 gem 'redis-store', '~> 1.0.0' # <- For caching
-gem 'less-rails'
 gem 'bootstrap-sass'
+gem 'font-awesome-rails'
 gem 'underscore-rails'
 gem 'httparty', '0.7.8'
 gem 'daemons-rails'

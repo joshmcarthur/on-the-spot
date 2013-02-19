@@ -54,10 +54,10 @@ autofillSearch = (event) ->
 	$('.modal').modal('hide')
 
 showActivity = ->
-	$('.spinner').removeClass('hidden')
+	$('.spinner').removeClass('hide')
 
 hideActivity = ->
-	$('.spinner').addClass('hidden')
+	$('.spinner').addClass('hide')
 
 handleSearchResults = (results) ->
 	processTracks(results.tracks)

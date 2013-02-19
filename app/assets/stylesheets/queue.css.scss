@@ -1,27 +1,4 @@
-#queue.modal.in:focus {
-	outline: none;
-}
-
-
-.currently_playing {
-	.playing_panel();
-
-	img {
-		margin-right: 25px;
-	}
-}
-
-.nothing {
-	text-align: center;
-	margin: 2% auto;
-	color: #666;
-}
-
-.play_queue {
-	.playing_panel()
-}
-
-.playing_panel() {
+@mixin playing_panel {
 	background: white;
 	border-radius: 6px;
 	padding: 2%;
@@ -35,6 +12,31 @@
 		color: #666;
 	}
 }
+
+#queue.modal.in:focus {
+	outline: none;
+}
+
+
+.currently_playing {
+	@include playing_panel;
+
+	img {
+		margin-right: 25px;
+	}
+}
+
+.nothing {
+	text-align: center;
+	margin: 2% auto;
+	color: #666;
+}
+
+.play_queue {
+	@include playing_panel;
+}
+
+
 
 ul#upcoming {
 	margin-top: 2%;

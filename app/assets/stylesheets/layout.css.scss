@@ -1,4 +1,11 @@
 
+@mixin heading_bubble($radius: 150px, $color: #FFFFFF) {
+	background-color: $color;
+	border-radius: 50%;
+	width: $radius;
+	height: $radius;
+}
+
 body { 
 	background: transparent image-url('background.gif');
 
@@ -12,7 +19,7 @@ body {
 
 	header {
 		background-color: white;
-		.heading_bubble(200px);
+		@include heading_bubble(200px);
 		margin: 1% auto 5%;
 		box-shadow: 0px 0px 10px #222;
 
@@ -29,7 +36,7 @@ body {
 
 	#nav_search {
 		font-family: 'Londrina Shadow', serif;
-		.heading_bubble(150px);
+		@include heading_bubble(150px);
 		position: relative;
 		top: -150px;
 		left: -110px;
@@ -43,7 +50,7 @@ body {
 
 	#nav_queue {
 		font-family: 'Londrina Shadow', serif;
-		.heading_bubble(150px);
+		@include heading_bubble(150px);
 		position: relative;
 		top: -300px;
 		left: 160px;
@@ -71,9 +78,3 @@ body {
 
 
 
-.heading_bubble (@radius: 150px, @color: #FFFFFF) {
-	background-color: @color;
-	border-radius: 50%;
-	width: @radius;
-	height: @radius;
-}
