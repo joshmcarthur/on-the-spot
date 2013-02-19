@@ -31,7 +31,6 @@ $ ->
 	$('#now_playing i[rel=tooltip]').tooltip(placement: 'bottom')
 	OnTheSpot.Queue.getCurrent()
 	PrivatePub.subscribe "/tracks/new", (data, channel) ->
-		console.log(data)
 		if data.track
 			OnTheSpot.Queue.setCurrent(data.track)
 		else if data.stopped

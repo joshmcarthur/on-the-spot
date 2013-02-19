@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require underscore
 //= require private_pub
-//= require twitter/bootstrap
+//= require bootstrap
 //= require jquery.parseparams
 //= require namespace
 //= require_tree .
