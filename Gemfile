@@ -13,17 +13,13 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'redis', '~> 2.2'
-gem 'json', '~> 1.7'
 gem 'hiredis'
 gem 'redis-store', '~> 1.0.0' # <- For caching
 gem 'less-rails'
-gem 'therubyracer'
-gem 'twitter-bootstrap-rails'
+gem 'bootstrap-sass'
 gem 'underscore-rails'
 gem 'httparty', '0.7.8'
 gem 'daemons-rails'
-gem 'meta-spotify'
 gem 'hallon'
 gem 'hallon-openal'
 gem 'private_pub'
