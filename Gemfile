@@ -22,11 +22,12 @@ gem 'httparty', '0.7.8'
 gem 'daemons-rails'
 gem 'hallon'
 gem 'hallon-openal'
+gem 'spotify'
 gem 'private_pub'
 gem 'dnssd'
 
 group :development, :test do
-  gem 'debugger'
+  gem 'byebug'
   gem 'rspec-rails'
   gem 'guard'
   gem 'guard-rspec'
